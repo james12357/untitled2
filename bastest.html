@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <title>转码测试</title>
+  <style>
+    #a{
+      color: gray;
+    }
+  </style>
+</head>
+<body>
+
+<input accept="file/*" name="upimage" id="upload_file" type="file">
+<label for="base64_output"></label><textarea id="base64_output" name="Word" style=" width:820px"></textarea>
+<div id="a"></div>
+<input type="button" id="b" value="转到">
+<script type="text/javascript">
+  let a = document.getElementById("a");
+  var str;//全局变量，用于存储base64字符串
+  document.getElementById("upload_file").onchange = function () {
+    gen_base64();
+
+  };
+  //图片转为base64编码字符串
+  function gen_base64() {
+    let file = document.getElementById('upload_file').files[0];
+    let r = new FileReader();  //本地预览
+
+    r.readAsDataURL(file);    //Base64
+    r.onload = function(){
+      document.getElementById('base64_output').value = r.result;
+      a.innerHTML = r.result.length + " bytes"
+      str = r.result;
+      return r.result;
+    }
+
+
+  }
+  document.getElementById("b")
+  .onclick = function (){
+    window.open(str);
+  }
+</script>
+</body>
+</html>

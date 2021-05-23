@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <style>
+    #d{
+      color: gray;
+    }
+  </style>
+</head>
+<body>
+<label for="a"></label><input type="text" id="a">
+<input type="button" id="b" value="加密">
+<input type="button" id="e" value="获取神秘小链接">
+<div id="c"></div>
+<div id="d"></div>
+<script>
+  a = document.getElementById("a");
+  b = document.getElementById("b");
+  c = document.getElementById("c");
+  d = document.getElementById("d");
+  e = document.getElementById("e");
+  b.onclick = function (){
+    let abyte = a.value.length;
+    let s = window.btoa(a.value);
+    let sbyte = s.length;
+    c.innerHTML = s;
+    d.innerHTML = "before " + abyte + " bytes, after " + sbyte;
+  }
+  e.onclick = function (){
+    let abyte = a.value.length;
+    let s = window.btoa(a.value);
+    let sbyte = s.length;
+    if(sbyte !== 0) {
+        c.innerHTML = "data:text/plain;base64," + s;
+    }
+    d.innerHTML = "before " + abyte + " bytes, after " + sbyte;
+  }
+</script>
+</body>
+</html>

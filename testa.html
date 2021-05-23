@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="zh">
+<head>
+  <meta charset="utf-8">
+  <title>计算器</title>
+  <style>/*样式随便造，自己看着顺眼就行*/
+
+  body{
+    font-weight: bolder;
+    color: white;
+  }
+
+  #all{width: 300px;
+    height: 500px;
+    background-color:#000;
+    margin: auto;
+  }
+  td{width: 60px;
+    height: 60px;
+    text-align: center;
+    border-radius: 50%;
+    transition: all,1s,1s;
+  }
+  td:hover{
+    height:70px;
+    width:70px;
+    font-size:28px;
+    color:yellow;
+    background-color: blue;
+    transition: all,1s,1s;
+  }
+  #jp{width: 270px;
+    height: 80px;
+    margin: 0 auto;
+    position: relative;
+  }
+  #jg{width: 270px;
+    height: 70px;
+    background: #ffffff;
+    position: absolute;
+    top: 10px;
+    font-size: 50px;
+    color: black;
+  }
+  #jg:hover{
+    background-color:lightgreen;
+    transition: all 2s 2s;
+  }
+  .a{
+    background-color: orange;
+  }
+  b{
+    font-size: 20px;
+  }
+  </style>
+  <!--********下面是JS代码*******-->
+  <script>
+    //定义全局变量
+    var tds=null;
+    var jg=null;
+    var dengyu=null;
+    var cle=null;
+    var tg=null;
+    //window加载完成后执行
+    window.onload=function(){
+      tds=document.getElementsByTagName("td");
+      jg=document.getElementById("jg");
+      dengyu=document.getElementById("dengyu");
+      tg=document.getElementById("tg");
+      cle=document.getElementById("cle");
+      addevt();
+    }
+    function addevt(){
+      for(var i=0;i<tds.length;i++){//利用for循环将按键里的个别按键剔除，因为这里是做的表格数组
+        var idZhi=tds[i].getAttribute("id");
+        if(idZhi){
+          continue; //遇到带“id”属性的就跳过
+        }
+        tds[i].onclick=function(){//为不带“id”的按键添加点击事件
+
+          jg.innerHTML+=this.innerHTML;//将按键的内容输入到显示区域
+        }
+      }
+//******单独为带id属性的按键设置点击事件*****
+      dengyu.onclick=function(){//等于
+        jg.innerHTML=eval(jg.innerHTML);
+      }
+      cle.onclick=function(){//清空
+        jg.innerHTML="";
+      }
+      tg.onclick=function(){//退格
+        var str=jg.innerHTML;
+        jg.innerHTML=str.substr(0,str.length-1);
+      }
+    }
+  </script>
+
+
+</head>
+<!--以下是页面-->
+<body>
+<div id="all">
+  <div id="jp">
+    <div id="jg"></div>
+  </div>
+  <table width="90%" height="300" border="1" align="center" cellspacing="10">
+    <tr>
+      <td class="b">7</td>
+      <td class="b">8</td>
+      <td class="b">9</td>
+      <td class="a b">+</td>
+    </tr>
+    <tr>
+      <td class="b">4</td>
+      <td class="b">5</td>
+      <td class="b">6</td>
+      <td class="a b">-</td>
+    </tr>
+    <tr>
+      <td class="b">1</td>
+      <td class="b">2</td>
+      <td class="b">3</td>
+      <td class="a b cr">*</td>
+    </tr>
+    <tr>
+      <td class="b">0</td>
+      <td class="b">.</td>
+      <td id="dengyu">=</td>
+      <td class="a b fr">/</td>
+    </tr>
+    <tr>
+      <td id="cle">清空</td>
+      <td id="tg">退格</td>
+    </tr>
+  </table>
+</div>
+</body>
+</html>
